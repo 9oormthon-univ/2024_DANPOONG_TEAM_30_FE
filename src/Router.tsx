@@ -3,6 +3,7 @@ import Layout from '@/components/common/Layout';
 import HomePage from '@/pages/HomePage.tsx';
 import SelfCheckPage from '@/pages/SelfCheckPage.tsx';
 import NoneContainerLayout from '@/components/common/Layout/NoneContainerLayout.tsx';
+import SelfCheckResultPage from '@/pages/SelfCheckResultPage.tsx';
 
 const Router = () => {
   return (
@@ -13,6 +14,7 @@ const Router = () => {
         </Route>
         <Route element={<NoneContainerLayout />}>
           <Route path='/self-check' element={<SelfCheckPage />} />
+          <Route path='/self-check-result' element={<SelfCheckResultPage />} />
         </Route>
       </Routes>
     </BrowserRouter>
