@@ -10,7 +10,10 @@ const SelfCheckPage = () => {
       <SimpleHeader title={'자립준비도 자가진단'} />
       <Container>
         <Gauge progress={10} />
-        <Theme />
+        <Theme
+          title={'건강에 관한 문제 입니다.'}
+          explain={'해당 질문에 맞는 항목에 체크해주세요.'}
+        />
         <Question />
         <Question />
         <Question />
