@@ -1,24 +1,14 @@
-import React from "react";
+import LogoIcon from "@/assets/icons/Logo.svg?react";
+import MessageBot from "@/assets/icons/MessageBot.svg?react";
+import MenuIcon from "@/assets/icons/Menu.svg?react";
 
 const Header = () => {
   return (
-    <div className="url flex flex-row mt-[40px]">
-      <img
-        src="https://ifh.cc/g/jc33wA.png"
-        alt="Example"
-        className="w-[28px] h-[25px]"
-      />
-      <img
-        src="https://ifh.cc/g/BXvdas.png"
-        alt="Example"
-        className="w-[28px] h-[25px] ml-[255px]"
-      />
+    <div className="url flex flex-row mt-[20px]">
+      <LogoIcon className="w-[28px] h-[25px] mt-[10px]" />
+      <MessageBot className="w-[48px] h-[43px] ml-[240px]" />
       <button>
-        <img
-          src="https://ifh.cc/g/vGdgnr.png"
-          alt="Example"
-          className="w-[28px] h-[25px] ml-[10px]"
-        />
+        <MenuIcon className="w-[45px] h-[40px] ml-auto mr-[14px] mt-[4px]" />
       </button>
     </div>
   );
