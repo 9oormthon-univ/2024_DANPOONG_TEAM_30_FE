@@ -1,6 +1,6 @@
-import Question from '@/components/SelfCheck/Question.tsx';
-import Theme from '@/components/SelfCheck/Theme.tsx';
-import Gauge from '@/components/SelfCheck/Gauge.tsx';
+import Question from '@/components/SelfCheckSurvey/Question.tsx';
+import Theme from '@/components/SelfCheckSurvey/Theme.tsx';
+import Gauge from '@/components/SelfCheckSurvey/Gauge.tsx';
 import SimpleHeader from '@/components/common/Header/SimpleHeader.tsx';
 import Container from '@/components/common/Layout/Container.tsx';
 
