@@ -6,7 +6,7 @@ import NoneContainerLayout from '@/components/common/Layout/NoneContainerLayout.
 import SelfCheckResultPage from '@/pages/SelfCheckResultPage.tsx';
 import ProgramDetailPage from '@/pages/ProgramDetail/ProgramDetailPage';
 import SelfCheckSurveyPage from '@/pages/SelfCheckSurveyPage.tsx';
-
+import ChatBotPage from '@/pages/ChatBotPage.tsx';
 
 const Router = () => {
   return (
@@ -23,6 +23,7 @@ const Router = () => {
         <Route element={<NoneContainerLayout />}>
           <Route path='/self-check/survey' element={<SelfCheckSurveyPage />} />
           <Route path='/self-check-result' element={<SelfCheckResultPage />} />
+          <Route path='/chat-bot' element={<ChatBotPage />} />
         </Route>
       </Routes>
     </BrowserRouter>
