@@ -28,15 +28,19 @@ const SelfCheckPage = () => {
         <Theme title={'쿨쿨이'} explain={'아직 자립 준비가 부족해'} />
         <img src={'/one.jpg'} alt={'ch'} className='w-[190px] mx-auto' />
         {showBadge ? (
-          <div className='h-[170px] flex flex-wrap justify-center gap-[15px]'>
-            <CompleteBadge />
-            <CompleteBadge />
-            <UnCompleteBadge />
-            <CompleteBadge />
-            <UnCompleteBadge />
+          <div className='flex flex-col gap-[15px] h-[200px]'>
+            <div className='grid grid-cols-3 gap-[15px] justify-items-center	'>
+              <Badge isComplete={true} text={'주거'} />
+              <Badge isComplete={true} text={'주거'} />
+              <Badge isComplete={false} text={'주거'} />
+            </div>
+            <div className='flex justify-center gap-[15px]'>
+              <Badge isComplete={true} text={'주거'} />
+              <Badge isComplete={true} text={'주거'} />
+            </div>
           </div>
         ) : (
-          <div className='mx-auto w-[80%] h-[170px] flex flex-col gap-[15px]'>
+          <div className='mx-auto w-[80%] h-[200px] flex flex-col justify-center gap-[15px]'>
             <Gauge title={'주거'} count={1} />
             <Gauge title={'주거'} count={2} />
             <Gauge title={'주거'} count={3} />
@@ -74,5 +78,14 @@ const ThemeButton = ({
     >
       {theme}
     </button>
+  );
+};
+
+const Badge = ({ isComplete, text }: { isComplete: boolean; text: string }) => {
+  return (
+    <div className={'flex flex-col items-center text-fontSmall'}>
+      {isComplete ? <CompleteBadge /> : <UnCompleteBadge />}
+      <span>{text}</span>
+    </div>
   );
 };
