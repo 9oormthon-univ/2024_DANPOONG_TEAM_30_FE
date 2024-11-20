@@ -3,9 +3,12 @@ import Gauge from '@/components/SelfCheckResult/Gauge.tsx';
 import { useState } from 'react';
 import CompleteBadge from '@/assets/icons/selfCheck/Complete-badge-icon.svg?react';
 import UnCompleteBadge from '@/assets/icons/selfCheck/unComplete-badge-icon.svg?react';
+import { useNavigate } from 'react-router-dom';
 
 const SelfCheckPage = () => {
   const [showBadge, setShowBadge] = useState<boolean>(true);
+  const navigate = useNavigate();
+
   return (
     <>
       <div
@@ -53,6 +56,9 @@ const SelfCheckPage = () => {
         className={
           'min-w-[290px] min-h-[50px] mx-auto mb-[20px] bg-main text-white rounded-[10px]'
         }
+        onClick={() => {
+          navigate('survey');
+        }}
       >
         자가진단 시작하기
       </button>

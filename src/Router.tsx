@@ -5,6 +5,7 @@ import SelfCheckPage from '@/pages/SelfCheckPage.tsx';
 import NoneContainerLayout from '@/components/common/Layout/NoneContainerLayout.tsx';
 import SelfCheckResultPage from '@/pages/SelfCheckResultPage.tsx';
 import ProgramDetailPage from '@/pages/ProgramDetail/ProgramDetailPage';
+import SelfCheckSurveyPage from '@/pages/SelfCheckSurveyPage.tsx';
 
 const Router = () => {
   return (
@@ -19,6 +20,7 @@ const Router = () => {
           <Route path='/self-check' element={<SelfCheckPage />} />
         </Route>
         <Route element={<NoneContainerLayout />}>
+          <Route path='/self-check/survey' element={<SelfCheckSurveyPage />} />
           <Route path='/self-check-result' element={<SelfCheckResultPage />} />
         </Route>
       </Routes>
