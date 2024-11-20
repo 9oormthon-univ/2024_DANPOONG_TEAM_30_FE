@@ -4,12 +4,14 @@ import MenuIcon from "@/assets/icons/Menu.svg?react";
 
 const Header = () => {
   return (
-    <div className="url flex flex-row mt-[20px]">
-      <LogoIcon className="w-[28px] h-[25px] mt-[10px]" />
-      <MessageBot className="w-[48px] h-[43px] ml-[240px]" />
-      <button>
-        <MenuIcon className="w-[45px] h-[40px] ml-auto mr-[14px] mt-[4px]" />
-      </button>
+    <div className="flex items-center justify-between mx-[24px] my-[18px]">
+      <LogoIcon />
+      <div className="flex">
+        <MessageBot />
+        <button>
+          <MenuIcon />
+        </button>
+      </div>
     </div>
   );
 };

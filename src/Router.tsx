@@ -7,6 +7,7 @@ import SelfCheckResultPage from '@/pages/SelfCheckResultPage.tsx';
 import ProgramDetailPage from '@/pages/ProgramDetail/ProgramDetailPage';
 import SelfCheckSurveyPage from '@/pages/SelfCheckSurveyPage.tsx';
 
+
 const Router = () => {
   return (
     <BrowserRouter>
