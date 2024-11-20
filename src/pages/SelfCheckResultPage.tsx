@@ -1,4 +1,4 @@
-import Theme from '@/components/SelfCheck/Theme.tsx';
+import Theme from '@/components/SelfCheckSurvey/Theme.tsx';
 import Gauge from '@/components/SelfCheckResult/Gauge.tsx';
 import Container from '@/components/common/Layout/Container.tsx';
 

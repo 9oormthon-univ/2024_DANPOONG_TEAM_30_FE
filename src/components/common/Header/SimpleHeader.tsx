@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import ArrowLeftIcon from '@/assets/icons/arrow-left-icon.svg?react';
+import ArrowLeftIcon from '@/assets/icons/common/arrow-left-icon.svg?react';
 
 const SimpleHeader = ({ title }: { title: string }) => {
   const navigate = useNavigate();
