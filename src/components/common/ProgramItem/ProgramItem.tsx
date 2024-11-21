@@ -10,7 +10,7 @@ const ProgramItem = () => {
   };
   return (
     <div
-      className="bg-zinc-100  h-[115px] rounded-xl mt-[16px] flex flex-row cursor-pointer items-center justify-between p-[26px]"
+      className="bg-zinc-100 hover:border-orange-400 border-white border-2 h-[115px] rounded-xl mt-[16px] flex flex-row cursor-pointer items-center justify-between p-[26px]"
       onClick={() => handleClick("1")} // 예: 프로그램 ID 1
     >
       <div className="flex flex-col">
