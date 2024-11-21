@@ -49,7 +49,7 @@ const SearchBar = () => {
       }
     >
       <SearchIcon />
-      <div className='w-[90%] text-fontSmall border-none rounded-lg text-gray50 text-left'>
+      <div className='w-[90%] text-fontSmall border-none rounded-lg text-gray50 text-left ml-[10px]'>
         주거지 검색
       </div>
     </Link>

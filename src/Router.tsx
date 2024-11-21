@@ -8,6 +8,7 @@ import ProgramDetailPage from '@/pages/ProgramDetail/ProgramDetailPage';
 import SelfCheckSurveyPage from '@/pages/SelfCheckSurveyPage.tsx';
 import ChatBotPage from '@/pages/ChatBotPage.tsx';
 import MapPage from '@/pages/MapPage.tsx';
+import SearchPage from '@/pages/SearchPage.tsx';
 
 const Router = () => {
   return (
@@ -26,6 +27,7 @@ const Router = () => {
           <Route path='/self-check-result' element={<SelfCheckResultPage />} />
           <Route path='/chat-bot' element={<ChatBotPage />} />
           <Route path='/map' element={<MapPage />} />
+          <Route path='/search' element={<SearchPage />} />
         </Route>
       </Routes>
     </BrowserRouter>
