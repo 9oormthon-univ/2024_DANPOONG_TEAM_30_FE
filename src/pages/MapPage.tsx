@@ -1,9 +1,17 @@
-import { Map, MapMarker } from 'react-kakao-maps-sdk';
+import { Map, MapMarker, MarkerClusterer } from 'react-kakao-maps-sdk';
 import Footer from '@/components/common/Footer';
 import { Link } from 'react-router-dom';
 import SearchIcon from '@/assets/icons/map/search-icon.svg?react';
+import { useEffect, useState } from 'react';
 
 const MapPage = () => {
+  const [positions, setPositions] = useState<{ lat: number; lng: number }[]>(
+    []
+  );
+  useEffect(() => {
+    setPositions(line());
+  }, []);
+
   return (
     <>
       <header className='px-[24px] py-[8px] bg-[#F6F6F6] font-weightMedium'>
@@ -25,12 +33,37 @@ const MapPage = () => {
       </header>
       <div className='h-full'>
         <Map
-          center={{ lat: 33.5563, lng: 126.79581 }}
-          style={{ width: '100%', height: '100%' }}
+          center={{
+            lat: 37.5115735,
+            lng: 127.0868931,
+          }}
+          style={{
+            width: '100%',
+            height: '100%',
+          }}
+          level={8}
         >
-          <MapMarker position={{ lat: 33.55635, lng: 126.795841 }}>
-            <div style={{ color: '#000' }}>Hello World!</div>
-          </MapMarker>
+          <MarkerClusterer
+            averageCenter={true} // 클러스터에 포함된 마커들의 평균 위치를 클러스터 마커 위치로 설정
+            minLevel={10} // 클러스터 할 최소 지도 레벨
+          >
+            {positions.map((pos) => (
+              <MapMarker
+                image={{
+                  src: '/marker-icon.svg',
+                  size: {
+                    width: 26,
+                    height: 32,
+                  },
+                }}
+                key={`${pos.lat}-${pos.lng}`}
+                position={{
+                  lat: pos.lat,
+                  lng: pos.lng,
+                }}
+              />
+            ))}
+          </MarkerClusterer>
         </Map>
       </div>
       <Footer />
@@ -75,4 +108,31 @@ const FilterItem = ({
       {content}
     </button>
   );
+};
+
+const line = () => {
+  return [
+    { order: 11, station: '잠실새내', code: [37.5115735, 127.0868931] },
+    { order: 23, station: '종합운동장', code: [37.5110588, 127.0737908] },
+    { order: 1456, station: '삼성', code: [37.5088803, 127.0631076] },
+    { order: 71, station: '선릉', code: [37.504585, 127.0492805] },
+    { order: 1341, station: '역삼', code: [37.5006431, 127.0363764] },
+    { order: 65, station: '강남', code: [37.4979526, 127.0276241] },
+    { order: 333, station: '교대', code: [37.4939732, 127.0146391] },
+    { order: 575, station: '방배', code: [37.4814955, 126.9976669] },
+    { order: 3, station: '사당', code: [37.4765793, 126.981596] },
+    { order: 578, station: '신대방', code: [37.4875672, 126.9133456] },
+    {
+      order: 976,
+      station: '구로디지털단지구로디지털단지',
+      code: [37.485266, 126.901401],
+    },
+    {
+      order: 1343,
+      station: '신도림',
+      code: [37.5088099, 126.8912061],
+    },
+    { order: 2345, station: '문래', code: [37.517933, 126.89476] },
+    { station: '두정역두정역역역역', code: [36.833791, 127.148905] },
+  ].map((item) => ({ lat: item.code[0], lng: item.code[1] }));
 };
