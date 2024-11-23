@@ -8,7 +8,7 @@ import MapIcon from '@/assets/icons/footer/map-icon.svg?react';
 const Footer = () => {
   return (
     <footer className='h-[85px] flex py-[10px]'>
-      <nav className='w-full flex justify-around items-center'>
+      <nav className='flex items-center justify-around w-full'>
         <NavItem path={'/'} contentName={'홈'}>
           <HomeIcon />
         </NavItem>
@@ -18,7 +18,7 @@ const Footer = () => {
         <NavItem path={'/self-check'} contentName={'자가진단'}>
           <SelfCheckIcon />
         </NavItem>
-        <NavItem path={'/map'} contentName={'지도'}>
+        <NavItem path={'/mapmain'} contentName={'지도'}>
           <MapIcon />
         </NavItem>
       </nav>

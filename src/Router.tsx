@@ -15,6 +15,7 @@ import ChatBotPage from '@/pages/ChatBotPage.tsx';
 import MapPage from '@/pages/MapPage.tsx';
 import SearchPage from '@/pages/SearchPage.tsx';
 import MapResultListPage from '@/pages/MapResultListPage.tsx';
+import MapMain from "./pages/MapMain";
 
 const Router = () => {
   return (
@@ -41,6 +42,7 @@ const Router = () => {
           <Route path='/self-check-result' element={<SelfCheckResultPage />} />
           <Route path='/chat-bot' element={<ChatBotPage />} />
           <Route path='/map' element={<MapPage />} />
+          <Route path='/mapmain' element={<MapMain />} />
           <Route path='/search' element={<SearchPage />} />
           <Route path='/map-result-list' element={<MapResultListPage />} />
         </Route>
