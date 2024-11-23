@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { accessToken } from '@/api/chatbotApi.ts';
@@ -8,8 +9,8 @@ const InfoPage = () => {
   const [nicknameError, setNicknameError] = useState(false); // 닉네임 에러 상태
   const [nicknameFocus, setNicknameFocus] = useState(false); // 닉네임 필드 focus 상태
   const [birthDateFocus, setBirthDateFocus] = useState(false); // 생년월일 필드 focus 상태
-  const [categories, setCategories] = useState<string[]>([]); // 관심 카테고리 상태
 
+  const navigate = useNavigate();
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
 
@@ -35,7 +36,6 @@ const InfoPage = () => {
 
     // 백스페이스 동작 처리
     if (birthDate.length > value.length) {
-      // 기존 값이 더 길면 사용자가 지운 동작
       setBirthDate(value); // 삭제 동작 그대로 반영
       return;
     }
@@ -61,6 +61,13 @@ const InfoPage = () => {
   const isButtonEnabled =
     nickname.length > 0 && birthDate.length === 10 && !nicknameError;
 
+  const handleSubmit = () => {
+    // 입력값을 localStorage에 저장
+    localStorage.setItem("nickname", nickname);
+    localStorage.setItem("birthDate", birthDate);
+
+    // 질문 페이지로 리다이렉트
+    navigate("/question");
   const handleSubmit = async () => {
     const payload = {
       nickname: nickname,

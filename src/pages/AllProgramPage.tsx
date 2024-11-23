@@ -3,13 +3,15 @@ import ProgramItem from '@/components/common/ProgramItem/ProgramItem';
 import { accessToken } from '@/api/chatbotApi.ts';
 
 interface Program {
+  status: string;
   id: number;
   title: string;
   startDate: string;
   endDate: string;
-  status: string;
+  // status: string;
   applicationUrl: string;
   scraped: boolean;
+  categoryTitle: string;
 }
 
 interface ProgramsResponse {
@@ -32,12 +34,14 @@ const AllProgramPage: React.FC = () => {
 
     try {
       const response = await fetch(
-        '/api/v1/programs?categoryId=1&size=5&lastKnowledgeId=10',
+        "/api/v1/programs?categoryTitle=주거&page=1",
+
         {
           method: 'GET',
           headers: {
-            'Content-type': 'application/json',
-            Authorization: `Bearer ${accessToken}`,
+            "Content-Type": "application/json",
+            Authorization: `Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxNDgiLCJBdXRob3JpemF0aW9uIjoiUk9MRV9NRU1CRVIiLCJleHAiOjE3MzI0MTUwMzQsImlhdCI6MTczMjM5NzAzNH0.OaxVDvegsurXDQRu3lgS_QbVRoqNL_e1iPPy2gXXT8J8DVymbmKxykUgODQMhD0x0aocyuQQ-AcJzXRtdU2fEA`,
+
           },
         }
       );
@@ -98,10 +102,11 @@ const AllProgramPage: React.FC = () => {
         {filteredPrograms.map((program) => (
           <ProgramItem
             key={program.id}
-            categoryTitle={program.status}
             title={program.title}
+            startDate={program.startDate}
             endDate={program.endDate}
             scraped={false}
+            categoryTitle={program.categoryTitle}
           />
         ))}
       </div>

@@ -6,14 +6,18 @@ import BookmarkIcon2 from "@/assets/icons/Bookmark2.svg?react";
 
 const ProgramItem = ({
   categoryTitle,
+  startDate,
   endDate,
   title,
   scraped,
-}: {
+}: // status,
+{
   categoryTitle: string;
+  startDate: string;
   endDate: string;
   title: string;
   scraped: boolean;
+  // status: string;
 }) => {
   const navigate = useNavigate();
   const [isBookmarked, setIsBookmarked] = useState(scraped); // Use state to track if the program is bookmarked
@@ -25,6 +29,10 @@ const ProgramItem = ({
   const handleBookmarkClick = () => {
     setIsBookmarked(!isBookmarked); // Toggle the bookmark state
   };
+
+  console.log(status);
+
+  console.log(categoryTitle);
 
   return (
     <div
@@ -43,13 +51,13 @@ const ProgramItem = ({
         <div className="text-md w-[220px]">{title}</div>
         <div className="text-xs text-zinc-500 mt-[4px] flex flex-row">
           <ClockIcon className="mr-[4px]" />
+          {startDate}
           {endDate}
         </div>
       </div>
       <div className="flex flex-col items-end">
         <div className="mb-[36px] cursor-pointer" onClick={handleBookmarkClick}>
           {isBookmarked ? <BookmarkIcon2 /> : <BookmarkIcon />}{" "}
-          {/* Toggle the icon */}
         </div>
         <button className="w-[52px] h-[27px] bg-orange-200 text-xs text-zinc-600 font-semibold rounded-2xl border border-orange-500">
           모집중
