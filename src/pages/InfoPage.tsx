@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 
 const InfoPage = () => {
   const [nickname, setNickname] = useState(""); // 닉네임 상태
@@ -7,6 +8,14 @@ const InfoPage = () => {
   const [nicknameFocus, setNicknameFocus] = useState(false); // 닉네임 필드 focus 상태
   const [birthDateFocus, setBirthDateFocus] = useState(false); // 생년월일 필드 focus 상태
   const [categories, setCategories] = useState<string[]>([]); // 관심 카테고리 상태
+
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+
+  const accessToken = queryParams.get("accessToken");
+  const refreshToken = queryParams.get("refreshToken");
+
+  console.log(refreshToken);
 
   // 닉네임 변경 처리
   const handleNicknameChange = (e: React.ChangeEvent<HTMLInputElement>) => {

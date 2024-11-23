@@ -1,6 +1,8 @@
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ClockIcon from "@/assets/icons/Clock.svg?react";
 import BookmarkIcon from "@/assets/icons/Bookmark.svg?react";
+import BookmarkIcon2 from "@/assets/icons/Bookmark2.svg?react";
 
 const ProgramItem = ({
   categoryTitle,
@@ -14,10 +16,16 @@ const ProgramItem = ({
   scraped: boolean;
 }) => {
   const navigate = useNavigate();
+  const [isBookmarked, setIsBookmarked] = useState(scraped); // Use state to track if the program is bookmarked
 
   const handleClick = (id: string) => {
     navigate(`/program/${id}`);
   };
+
+  const handleBookmarkClick = () => {
+    setIsBookmarked(!isBookmarked); // Toggle the bookmark state
+  };
+
   return (
     <div
       className="bg-gray1 h-[115px] rounded-xl flex flex-row cursor-pointer items-center justify-between p-[26px]"
@@ -39,7 +47,10 @@ const ProgramItem = ({
         </div>
       </div>
       <div className="flex flex-col items-end">
-        <BookmarkIcon className="mb-[36px] cursor-pointer" />
+        <div className="mb-[36px] cursor-pointer" onClick={handleBookmarkClick}>
+          {isBookmarked ? <BookmarkIcon2 /> : <BookmarkIcon />}{" "}
+          {/* Toggle the icon */}
+        </div>
         <button className="w-[52px] h-[27px] bg-orange-200 text-xs text-zinc-600 font-semibold rounded-2xl border border-orange-500">
           모집중
         </button>
