@@ -14,6 +14,7 @@ interface Program {
   status: string;
   applicationUrl: string;
   scraped: boolean;
+  categoryTitle: string;
 }
 
 interface Knowledge {
@@ -65,6 +66,8 @@ const HomePage: React.FC = () => {
     fetchMainData();
   }, []);
 
+  console.log(programs);
+
   // 뱃지 확인 버튼 클릭 시
   const handleBadgeClick = () => {
     setIsBadgeChecked((prev) => !prev);
@@ -107,7 +110,7 @@ const HomePage: React.FC = () => {
                   title={program.title}
                   endDate={program.endDate}
                   scraped={program.scraped}
-                  categoryTitle={""}
+                  categoryTitle={program.status}
                 />
               ))
             ) : (
