@@ -7,7 +7,7 @@ import MapIcon from '@/assets/icons/footer/map-icon.svg?react';
 
 const Footer = () => {
   return (
-    <footer className='min-h-[85px] flex py-[10px]'>
+    <footer className='min-h-[70px] flex py-[10px]'>
       <nav className='w-full flex justify-around items-center'>
         <NavItem path={'/'} contentName={'홈'}>
           <HomeIcon />
