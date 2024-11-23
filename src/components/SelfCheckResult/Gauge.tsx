@@ -5,7 +5,7 @@ const Gauge = ({ title, count }: { title: string; count: number }) => {
         {title}
       </span>
       <div className={'flex bg-sub3 min-h-[20px] w-full'}>
-        {Array(count)
+        {Array(Math.ceil(count / 2))
           .fill(0)
           .map((_, index) => (
             <div
