@@ -63,9 +63,8 @@ const SelfCheckResultPage = () => {
         <p className={'font-weightSemiBold'}>쿨쿨낙엽님을 위한 추천 프로그램</p>
         <div className={'flex gap-[8px] overflow-x-auto mt-[16px]'}>
           {responseData.programs.map((item) => (
-            <div className={'border-2 border-main rounded-xl'}>
+            <div key={item.id} className={'border-2 border-main rounded-xl'}>
               <ProgramItem
-                key={item.id}
                 categoryTitle={item.categoryTitle}
                 endDate={item.endDate}
                 title={item.title}

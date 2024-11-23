@@ -1,7 +1,9 @@
 // const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 export const API_PATH = {
-  CHAT_BOT: {
-    GET: 'api/v1/diagnosis/result',
+  SELF_CHECK: {
+    RESULT: { GET: '/api/v1/diagnosis/result' },
+    QUESTION: { GET: '/api/v1/diagnosis/questions' },
+    SURVEY: { POST: '/api/v1/diagnosis' },
   },
 };
