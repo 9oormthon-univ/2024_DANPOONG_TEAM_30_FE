@@ -16,6 +16,7 @@ const MapPage = () => {
   const [positions, setPositions] = useState<{ lat: number; lng: number }[]>(
     []
   );
+
   const [selectedRegion, setSelectedRegion] = useState<{
     city: string;
     district: string;
@@ -199,8 +200,8 @@ const MapPage = () => {
       <div className='h-full'>
         <Map
           center={{
-            lat: 37.5115735,
-            lng: 127.0868931,
+            lat: 37.366183,
+            lng: 127.127342,
           }}
           style={{
             width: '100%',
