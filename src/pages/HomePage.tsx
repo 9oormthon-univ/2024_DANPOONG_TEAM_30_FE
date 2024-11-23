@@ -93,7 +93,12 @@ const HomePage: React.FC = () => {
               </div>
               <VectorIcon className="ml-[60px]" />
             </div>
-            <button className="w-full mx-auto h-[50px] bg-orange-400 mt-[20px] rounded-xl">
+            <button
+              className="w-full mx-auto h-[50px] bg-orange-400 mt-[20px] rounded-xl"
+              onClick={() => {
+                navigate("/know"); // 버튼 클릭 시 /know 경로로 이동
+              }}
+            >
               더 알아보기
             </button>
           </div>
