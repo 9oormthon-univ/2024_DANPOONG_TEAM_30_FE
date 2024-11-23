@@ -16,6 +16,7 @@ import MapPage from '@/pages/MapPage.tsx';
 import SearchPage from '@/pages/SearchPage.tsx';
 import MapResultListPage from '@/pages/MapResultListPage.tsx';
 import MapMain from "./pages/MapMain";
+import KnowPage from "@/pages/KnowPage.tsx";
 
 const Router = () => {
   return (
@@ -24,10 +25,11 @@ const Router = () => {
         {/* Layout을 포함한 공통 구조 */}
         <Route element={<Layout />}>
           {/* HomePage 경로 */}
-          <Route path='/' element={<HomePage />} />
+          <Route path="/" element={<HomePage />} />
           {/* ProgramDetailPage 경로 */}
-          <Route path='/program/:id' element={<ProgramDetailPage />} />
-          <Route path='/self-check' element={<SelfCheckPage />} />
+          <Route path="/self-check" element={<SelfCheckPage />} />
+          <Route path="/allprogram" element={<AllProgramPage />} />
+          <Route path="/know" element={<KnowPage />} />
         </Route>
         <Route element={<NoneContainerLayout />}>
           <Route path="/self-check" element={<SelfCheckPage />} />

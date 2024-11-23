@@ -1,7 +1,5 @@
 import { useState } from "react";
-import Header from "@/components/common/Header/index";
-import Container from "@/components/common/Layout/Container";
-import ProgramItem from "@/components/common/ProgramItem/ProgramItem";
+import KnowItem from "@/components/common/ProgramItem/KnowItem";
 
 const AllProgramPage: React.FC = () => {
   const categories = ["건강", "금융", "교육", "주거"];
@@ -10,7 +8,7 @@ const AllProgramPage: React.FC = () => {
   return (
     <>
       <div className="flex flex-row mb-[28px]">
-        <div className="font-semibold text-xl">레디님 분야별 맞춤 정책</div>
+        <div className="font-semibold text-xl">꼭 필요한 자립 지식</div>
         <div className="w-[76px] h-[22px] bg-orange-200 rounded-sm text-xs text-center p-1 ml-auto">
           스크랩 보기
         </div>
@@ -36,7 +34,7 @@ const AllProgramPage: React.FC = () => {
       </div>
       <div className="mb-auto flex flex-col gap-[16px]">
         {[0, 0, 0].map((item, i) => (
-          <ProgramItem key={i} />
+          <KnowItem key={i} />
         ))}
       </div>
     </>
