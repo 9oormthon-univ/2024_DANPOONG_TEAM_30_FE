@@ -66,6 +66,7 @@ const SelfCheckPage = () => {
             <div className='grid grid-cols-3 gap-[15px] justify-items-center	'>
               {badge1.map((item) => (
                 <Badge
+                  key={item}
                   isComplete={responseData.badges.includes(item)}
                   text={bedgeName[item]}
                 />
@@ -74,6 +75,7 @@ const SelfCheckPage = () => {
             <div className='flex justify-center gap-[15px]'>
               {badge2.map((item) => (
                 <Badge
+                  key={item}
                   isComplete={responseData.badges.includes(item)}
                   text={bedgeName[item]}
                 />
