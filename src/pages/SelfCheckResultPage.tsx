@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react';
 import { selfCheckResultApi } from '@/api/selfCheckApi.ts';
 import { SelfCheckResult } from '@/types/selfCheck.ts';
 
-const character = {
+export const character = {
   ONE: '쿨쿨이',
   TWO: '뚝딱뚝딱',
   THREE: '두근두근',
@@ -14,7 +14,7 @@ const character = {
   FIVE: '으쓱으쓱',
 };
 
-const explain = {
+export const explain = {
   ONE: '아직 자립 준비가 부족해',
   TWO: '조금씩 움직이며 자립을 준비하는 중',
   THREE: '자립에 대한 기대감과 긴장감이 공존하는 상태',

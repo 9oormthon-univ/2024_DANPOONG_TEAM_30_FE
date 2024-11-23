@@ -12,3 +12,16 @@ export interface QuestionType {
   questionId: string;
   question: string;
 }
+
+export interface SelfCheckMain {
+  characterType: 'ONE' | 'TWO' | 'THREE' | 'FOUR' | 'FIVE';
+  results: { categoryTitle: string; score: number }[];
+  badges: badge[];
+}
+
+export type badge =
+  | 'EMPLOYMENT'
+  | 'HEALTH'
+  | 'RESIDENCE'
+  | 'FINANCE'
+  | 'EDUCATION';
