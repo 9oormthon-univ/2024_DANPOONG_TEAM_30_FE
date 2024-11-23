@@ -4,7 +4,8 @@ import KakaoLogoIcon from "@/assets/icons/KakaoLogo.svg?react";
 
 const OnboardingPage = () => {
   const loginHandler = () => {
-    window.location.href = "/api/v1/auth/oauth2/authorization/kakao";
+    window.location.href =
+      "https://ready-action.store/oauth2/authorization/kakao";
   };
 
   return (
