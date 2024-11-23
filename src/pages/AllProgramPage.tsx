@@ -1,5 +1,6 @@
-import { useState, useEffect } from "react";
-import ProgramItem from "@/components/common/ProgramItem/ProgramItem";
+import { useState, useEffect } from 'react';
+import ProgramItem from '@/components/common/ProgramItem/ProgramItem';
+import { accessToken } from '@/api/chatbotApi.ts';
 
 interface Program {
   id: number;
@@ -18,7 +19,7 @@ interface ProgramsResponse {
 }
 
 const AllProgramPage: React.FC = () => {
-  const categories = ["건강", "금융", "교육", "주거"];
+  const categories = ['건강', '금융', '교육', '주거'];
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [programs, setPrograms] = useState<Program[]>([]);
   const [loading, setLoading] = useState(false);
@@ -31,18 +32,18 @@ const AllProgramPage: React.FC = () => {
 
     try {
       const response = await fetch(
-        "/api/v1/programs?categoryId=1&size=5&lastKnowledgeId=10",
+        '/api/v1/programs?categoryId=1&size=5&lastKnowledgeId=10',
         {
-          method: "GET",
+          method: 'GET',
           headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxNDgiLCJBdXRob3JpemF0aW9uIjoiUk9MRV9NRU1CRVIiLCJleHAiOjE3MzIzOTY5MDYsImlhdCI6MTczMjM3ODkwNn0.i4QgorB7dg__ZZDabtsoY01T_ObpSdGk1hT0fOflRf-oqBKO5xPSO001Vb0Piwizn9Z354XZReMKa4UROnfMmw`,
+            'Content-type': 'application/json',
+            Authorization: `Bearer ${accessToken}`,
           },
         }
       );
 
       if (!response.ok) {
-        throw new Error("데이터를 가져오지 못했습니다.");
+        throw new Error('데이터를 가져오지 못했습니다.');
       }
 
       const data: ProgramsResponse = await response.json();
@@ -68,20 +69,20 @@ const AllProgramPage: React.FC = () => {
 
   return (
     <>
-      <div className="flex flex-row mb-[28px]">
-        <div className="font-semibold text-xl">레디님 분야별 맞춤 정책</div>
-        <div className="w-[76px] h-[22px] bg-orange-200 rounded-sm text-xs text-center p-1 ml-auto">
+      <div className='flex flex-row mb-[28px]'>
+        <div className='font-semibold text-xl'>레디님 분야별 맞춤 정책</div>
+        <div className='w-[76px] h-[22px] bg-orange-200 rounded-sm text-xs text-center p-1 ml-auto'>
           스크랩 보기
         </div>
       </div>
-      <div className="flex flex-row w-full gap-3 mb-[43px]">
+      <div className='flex flex-row w-full gap-3 mb-[43px]'>
         {categories.map((category) => (
           <div
             key={category}
             className={`w-[70px] h-[40px] border rounded-3xl font-semibold text-md p-2 text-center cursor-pointer ${
               selectedCategory === category
-                ? "bg-orange-200 text-black border-orange-500"
-                : "text-zinc-400 border-zinc-300"
+                ? 'bg-orange-200 text-black border-orange-500'
+                : 'text-zinc-400 border-zinc-300'
             }`}
             onClick={() =>
               setSelectedCategory((prev) =>
@@ -93,7 +94,7 @@ const AllProgramPage: React.FC = () => {
           </div>
         ))}
       </div>
-      <div className="mb-auto flex flex-col gap-[16px]">
+      <div className='mb-auto flex flex-col gap-[16px]'>
         {filteredPrograms.map((program) => (
           <ProgramItem
             key={program.id}

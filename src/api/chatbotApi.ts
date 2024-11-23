@@ -1,5 +1,8 @@
 import { API_PATH } from '@/constants/path.ts';
 
+export const accessToken =
+  'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxNDgiLCJBdXRob3JpemF0aW9uIjoiUk9MRV9NRU1CRVIiLCJleHAiOjE3MzI0MTUwMzQsImlhdCI6MTczMjM5NzAzNH0.OaxVDvegsurXDQRu3lgS_QbVRoqNL_e1iPPy2gXXT8J8DVymbmKxykUgODQMhD0x0aocyuQQ-AcJzXRtdU2fEA';
+
 export const chatbotDepthApi = async (questionType: string) => {
   const queryString = new URLSearchParams({ questionType });
   try {
@@ -9,7 +12,7 @@ export const chatbotDepthApi = async (questionType: string) => {
         method: 'GET',
         headers: {
           'Content-type': 'application/json',
-          Authorization: `Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxNDgiLCJBdXRob3JpemF0aW9uIjoiUk9MRV9NRU1CRVIiLCJleHAiOjE3MzI0MDcwMjksImlhdCI6MTczMjM4OTAyOX0.ycOtWzJSQtWAoQXnwoOSfDVjQHQlO6xjT_6zuDsEZ78B-gpeZ5TVslcy5yrkeAzM5gUHOt_3nhJ-BbtJX_kTag`,
+          Authorization: `Bearer ${accessToken}`,
         },
       }
     );
@@ -33,7 +36,7 @@ export const chatbotResultApi = async (questionType: string, depth: string) => {
         method: 'GET',
         headers: {
           'Content-type': 'application/json',
-          Authorization: `Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxNDgiLCJBdXRob3JpemF0aW9uIjoiUk9MRV9NRU1CRVIiLCJleHAiOjE3MzI0MDcwMjksImlhdCI6MTczMjM4OTAyOX0.ycOtWzJSQtWAoQXnwoOSfDVjQHQlO6xjT_6zuDsEZ78B-gpeZ5TVslcy5yrkeAzM5gUHOt_3nhJ-BbtJX_kTag`,
+          Authorization: `Bearer ${accessToken}`,
         },
       }
     );

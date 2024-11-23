@@ -1,4 +1,5 @@
 import { API_PATH } from '@/constants/path.ts';
+import { accessToken } from '@/api/chatbotApi.ts';
 
 export const selfCheckResultApi = async () => {
   try {
@@ -6,7 +7,7 @@ export const selfCheckResultApi = async () => {
       method: 'GET',
       headers: {
         'Content-type': 'application/json',
-        Authorization: `Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxNDgiLCJBdXRob3JpemF0aW9uIjoiUk9MRV9NRU1CRVIiLCJleHAiOjE3MzI0MDcwMjksImlhdCI6MTczMjM4OTAyOX0.ycOtWzJSQtWAoQXnwoOSfDVjQHQlO6xjT_6zuDsEZ78B-gpeZ5TVslcy5yrkeAzM5gUHOt_3nhJ-BbtJX_kTag`,
+        Authorization: `Bearer ${accessToken}`,
       },
     });
 
@@ -31,7 +32,7 @@ export const GetSelfCheckQuestionsApi = async (page: string) => {
         method: 'GET',
         headers: {
           'Content-type': 'application/json',
-          Authorization: `Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxNDgiLCJBdXRob3JpemF0aW9uIjoiUk9MRV9NRU1CRVIiLCJleHAiOjE3MzI0MDcwMjksImlhdCI6MTczMjM4OTAyOX0.ycOtWzJSQtWAoQXnwoOSfDVjQHQlO6xjT_6zuDsEZ78B-gpeZ5TVslcy5yrkeAzM5gUHOt_3nhJ-BbtJX_kTag`,
+          Authorization: `Bearer ${accessToken}`,
         },
       }
     );
@@ -53,7 +54,7 @@ export const PostSelfCheckQuestionsApi = async (data: string) => {
       method: 'POST',
       headers: {
         'Content-type': 'application/json',
-        Authorization: `Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxNDgiLCJBdXRob3JpemF0aW9uIjoiUk9MRV9NRU1CRVIiLCJleHAiOjE3MzI0MDcwMjksImlhdCI6MTczMjM4OTAyOX0.ycOtWzJSQtWAoQXnwoOSfDVjQHQlO6xjT_6zuDsEZ78B-gpeZ5TVslcy5yrkeAzM5gUHOt_3nhJ-BbtJX_kTag`,
+        Authorization: `Bearer ${accessToken}`,
       },
       body: data,
     });
@@ -70,7 +71,7 @@ export const getSelfCheckMain = async () => {
       method: 'GET',
       headers: {
         'Content-type': 'application/json',
-        Authorization: `Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxNDgiLCJBdXRob3JpemF0aW9uIjoiUk9MRV9NRU1CRVIiLCJleHAiOjE3MzI0MDcwMjksImlhdCI6MTczMjM4OTAyOX0.ycOtWzJSQtWAoQXnwoOSfDVjQHQlO6xjT_6zuDsEZ78B-gpeZ5TVslcy5yrkeAzM5gUHOt_3nhJ-BbtJX_kTag`,
+        Authorization: `Bearer ${accessToken}`,
       },
     });
 

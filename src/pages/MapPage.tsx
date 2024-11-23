@@ -2,31 +2,50 @@ import { Map, MapMarker, MarkerClusterer } from 'react-kakao-maps-sdk';
 import Footer from '@/components/common/Footer';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import SearchIcon from '@/assets/icons/map/search-icon.svg?react';
-import ChevronDownIcon from "@/assets/icons/map/chevron-down.svg?react";
+import ChevronDownIcon from '@/assets/icons/map/chevron-down.svg?react';
 import { useEffect, useState } from 'react';
+import getHouseResultApi from '@/api/mapApi.ts';
 
+// interface house {
+//   longitude
+// }
 
 const MapPage = () => {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
-  const [positions, setPositions] = useState<{ lat: number; lng: number }[]>([]);
-  const [selectedRegion, setSelectedRegion] = useState<{city: string; district: string} | null>(null);
+  const [positions, setPositions] = useState<{ lat: number; lng: number }[]>(
+    []
+  );
+  const [selectedRegion, setSelectedRegion] = useState<{
+    city: string;
+    district: string;
+  } | null>(null);
   const [activeFilter, setActiveFilter] = useState<'price' | 'area'>('area');
   const [selectedArea, setSelectedArea] = useState<string>('전체');
   const [isAreaExpanded, setIsAreaExpanded] = useState(false);
   const [priceRange, setPriceRange] = useState<number>(9000);
-  const [inputPrice, setInputPrice] = useState<string>("9000");
+  const [inputPrice, setInputPrice] = useState<string>('9000');
+  const [houses, setHouses] = useState([]);
+  const apiFunc = async () => {
+    if (!selectedRegion?.city && !selectedRegion?.district) return null;
+    const response = await getHouseResultApi(
+      selectedRegion.city,
+      selectedRegion.district
+    );
+    console.log(response);
+    setHouses(response);
+  };
 
   useEffect(() => {
     setPositions(line());
-    
+
     const city = searchParams.get('city');
     const district = searchParams.get('district');
-    
+
     if (city && district) {
       setSelectedRegion({
         city: decodeURIComponent(city),
-        district: decodeURIComponent(district)
+        district: decodeURIComponent(district),
       });
     }
   }, [searchParams]);
@@ -53,13 +72,13 @@ const MapPage = () => {
 
   const handlePriceInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value.replace(/[^0-9]/g, '');
-    
+
     if (value === '') {
       setInputPrice('');
       setPriceRange(0);
       return;
     }
-    
+
     const numValue = parseInt(value);
     setInputPrice(value);
     setPriceRange(numValue * 10);
@@ -83,28 +102,30 @@ const MapPage = () => {
   return (
     <>
       <header className='px-[24px] py-[8px] font-weightMedium'>
-        <button 
+        <button
           onClick={handleRegionClick}
-          className="flex items-center w-full py-2 mt-[50px] left"
+          className='flex items-center w-full py-2 mt-[50px] left'
         >
-          <span className="text-lg font-medium">
-            {selectedRegion ? `${selectedRegion.city} ${selectedRegion.district}` : '지역 선택'}
+          <span className='text-lg font-medium'>
+            {selectedRegion
+              ? `${selectedRegion.city} ${selectedRegion.district}`
+              : '지역 선택'}
           </span>
-          <ChevronDownIcon/>
+          <ChevronDownIcon />
         </button>
-        
+
         <div className='mt-[5px] mb-[5px] flex gap-[10px]'>
-          <FilterItem 
-            isCategory={true} 
-            content='금액' 
+          <FilterItem
+            isCategory={true}
+            content='금액'
             isActive={activeFilter === 'price'}
-            onClick={() => handleFilterSelect('price')} 
+            onClick={() => handleFilterSelect('price')}
           />
-          <FilterItem 
-            isCategory={true} 
-            content='구조 면적' 
+          <FilterItem
+            isCategory={true}
+            content='구조 면적'
             isActive={activeFilter === 'area'}
-            onClick={() => handleFilterSelect('area')} 
+            onClick={() => handleFilterSelect('area')}
           />
         </div>
 
@@ -118,7 +139,7 @@ const MapPage = () => {
               >
                 {selectedArea}
               </button>
-              
+
               {isAreaExpanded && (
                 <div className='absolute top-[44px] left-0 w-full  bg-white border border-gray-300 rounded-[12px] shadow-lg z-10'>
                   {['전체', '10평대', '20평대', '30평대'].map((area) => (
@@ -126,7 +147,9 @@ const MapPage = () => {
                       key={area}
                       onClick={() => handleAreaSelect(area)}
                       className={`w-full h-[40px] text-sm  hover:bg-[#FFF4EE] ${
-                        selectedArea === area ? 'bg-[#FFF4EE] text-[#FF8D52]' : ''
+                        selectedArea === area
+                          ? 'bg-[#FFF4EE] text-[#FF8D52]'
+                          : ''
                       } ${area === '전체' ? 'rounded-t-[12px]' : ''} 
                       ${area === '30평대' ? 'rounded-b-[12px]' : ''}`}
                     >
@@ -145,27 +168,29 @@ const MapPage = () => {
             <div className='relative'>
               <div className='relative w-full'>
                 <input
-                  type="text"
+                  type='text'
                   value={inputPrice}
                   onChange={handlePriceInput}
                   onBlur={handlePriceBlur}
-                  className="w-full h-[40px] rounded-[20px] border border-gray-300 text-center pr-[52px] font-medium focus:outline-none focus:border-[#FF8D52]"
-                  placeholder="금액 입력"
+                  className='w-full h-[40px] rounded-[20px] border border-gray-300 text-center pr-[52px] font-medium focus:outline-none focus:border-[#FF8D52]'
+                  placeholder='금액 입력'
                 />
-                <span className="absolute right-[20px] top-1/2 transform -translate-y-1/2 text-gray-500">
+                <span className='absolute right-[20px] top-1/2 transform -translate-y-1/2 text-gray-500'>
                   만원 이하
                 </span>
               </div>
-              <div className="text-right">
-                <span className="text-xs text-gray-400">7000 ~ 1,200만원</span>
+              <div className='text-right'>
+                <span className='text-xs text-gray-400'>7000 ~ 1,200만원</span>
               </div>
             </div>
           </div>
         )}
 
-        <button 
+        <button
           className='bg-[#FF8D52] text-white h-[44px] my-[10px] w-full rounded-[22px] hover:bg-[#ff7c39]'
-          onClick={() => {/* 필터 적용 로직 */}}
+          onClick={() => {
+            apiFunc();
+          }}
         >
           적용하기
         </button>
@@ -183,23 +208,21 @@ const MapPage = () => {
           }}
           level={8}
         >
-          <MarkerClusterer
-            averageCenter={true}
-            minLevel={10}
-          >
-            {positions.map((pos) => (
-              <MapMarker
-                image={{
-                  src: '/marker-icon.svg',
-                  size: {
-                    width: 26,
-                    height: 32,
-                  },
-                }}
-                key={`${pos.lat}-${pos.lng}`}
-                position={pos}
-              />
-            ))}
+          <MarkerClusterer averageCenter={true} minLevel={10}>
+            {houses.length > 0 &&
+              houses.map((pos) => (
+                <MapMarker
+                  image={{
+                    src: '/marker-icon.svg',
+                    size: {
+                      width: 26,
+                      height: 32,
+                    },
+                  }}
+                  key={``}
+                  position={{ lat: pos.latitude, lng: pos.longitude }}
+                />
+              ))}
           </MarkerClusterer>
         </Map>
       </div>
@@ -238,7 +261,9 @@ const FilterItem = ({
   return (
     <button
       className={`${isCategory ? 'w-[80px] h-[30px] rounded-full' : 'w-[70px]'} h-[30px] border-[1px] ${
-        isActive ? 'bg-[#FFF4EE] border-[#FF8D52] text-[#FF8D52]' : 'border-gray50'
+        isActive
+          ? 'bg-[#FFF4EE] border-[#FF8D52] text-[#FF8D52]'
+          : 'border-gray50'
       }
         ${!isCategory && !isActive && 'text-gray50'}
       `}
