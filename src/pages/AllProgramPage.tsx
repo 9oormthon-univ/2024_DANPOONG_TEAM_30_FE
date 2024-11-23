@@ -1,11 +1,70 @@
-import { useState } from "react";
-import Header from "@/components/common/Header/index";
-import Container from "@/components/common/Layout/Container";
+import { useState, useEffect } from "react";
 import ProgramItem from "@/components/common/ProgramItem/ProgramItem";
+
+interface Program {
+  id: number;
+  title: string;
+  startDate: string;
+  endDate: string;
+  status: string;
+  applicationUrl: string;
+  scraped: boolean;
+}
+
+interface ProgramsResponse {
+  contents: Program[];
+  categoryTitle: string;
+  hasNextPage: boolean;
+}
 
 const AllProgramPage: React.FC = () => {
   const categories = ["건강", "금융", "교육", "주거"];
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  const [programs, setPrograms] = useState<Program[]>([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  // API 호출 함수
+  const fetchPrograms = async () => {
+    setLoading(true);
+    setError(null);
+
+    try {
+      const response = await fetch(
+        "/api/v1/programs?categoryId=1&size=5&lastKnowledgeId=10",
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxNDgiLCJBdXRob3JpemF0aW9uIjoiUk9MRV9NRU1CRVIiLCJleHAiOjE3MzIzOTY5MDYsImlhdCI6MTczMjM3ODkwNn0.i4QgorB7dg__ZZDabtsoY01T_ObpSdGk1hT0fOflRf-oqBKO5xPSO001Vb0Piwizn9Z354XZReMKa4UROnfMmw`,
+          },
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("데이터를 가져오지 못했습니다.");
+      }
+
+      const data: ProgramsResponse = await response.json();
+      setPrograms(data.contents);
+    } catch (error) {
+      setError((error as Error).message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchPrograms();
+  }, []);
+
+  // 선택된 카테고리 필터링
+  const filteredPrograms = selectedCategory
+    ? programs.filter((program) => program.status === selectedCategory)
+    : programs;
+
+  if (loading) return <div>로딩 중...</div>;
+  if (error) return <div>에러 발생: {error}</div>;
 
   return (
     <>
@@ -35,8 +94,14 @@ const AllProgramPage: React.FC = () => {
         ))}
       </div>
       <div className="mb-auto flex flex-col gap-[16px]">
-        {[0, 0, 0].map((item, i) => (
-          <ProgramItem key={i} />
+        {filteredPrograms.map((program) => (
+          <ProgramItem
+            key={program.id}
+            categoryTitle={program.status}
+            title={program.title}
+            endDate={program.endDate}
+            scraped={false}
+          />
         ))}
       </div>
     </>

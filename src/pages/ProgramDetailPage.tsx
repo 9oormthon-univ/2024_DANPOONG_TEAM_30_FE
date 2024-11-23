@@ -47,9 +47,15 @@ const ProgramDetailPage: React.FC = () => {
             >
               스크랩
               {isScraped ? (
-                <BookmarkIcon2 className="ml-[8px]" />
+                <BookmarkIcon2
+                  className="ml-[8px]"
+                  onClick={() => setIsScraped(!isScraped)}
+                />
               ) : (
-                <BookmarkIcon className="ml-[8px]" />
+                <BookmarkIcon
+                  className="ml-[8px]"
+                  onClick={() => setIsScraped(!isScraped)}
+                />
               )}
             </button>
             <button className="w-1/2 h-[42px] hover:border-orange-400 hover:border-2 font-md bg-white border border-zinc-400 ml-auto flex items-center justify-center mr-[10px]">
