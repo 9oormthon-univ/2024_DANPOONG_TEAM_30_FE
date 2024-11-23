@@ -3,19 +3,32 @@ import React, { useState } from "react";
 const InfoPage = () => {
   const [nickname, setNickname] = useState(""); // 닉네임 상태
   const [birthDate, setBirthDate] = useState(""); // 생년월일 상태
-  const [nicknameError, setNicknameError] = useState(false); // 닉네임 에러 상태
+  const [nicknameError, setNicknameError] = useState(""); // 닉네임 에러 상태
   const [nicknameFocus, setNicknameFocus] = useState(false); // 닉네임 필드 focus 상태
   const [birthDateFocus, setBirthDateFocus] = useState(false); // 생년월일 필드 focus 상태
+  const [isButtonClicked, setIsButtonClicked] = useState(false); // 완료 버튼 클릭 상태
 
   // 닉네임 변경 처리
   const handleNicknameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
-    if (value.length > 5) {
-      setNicknameError(true);
+
+    // 한글(완성형 및 초성/중성/종성 포함)만 허용
+    const koreanRegex = /^[\u3131-\u3163\uac00-\ud7a3]*$/;
+
+    if (value.length === 0) {
+      setNicknameError(""); // 입력값이 없을 때는 에러가 아님
+    } else if (!koreanRegex.test(value)) {
+      setNicknameError("올바르지 않은 형식입니다."); // 한글 외의 문자가 포함된 경우
+    } else if (value.length > 5) {
+      setNicknameError("닉네임은 5글자 이하여야 합니다."); // 5글자 초과 시
     } else {
-      setNicknameError(false);
+      setNicknameError(""); // 에러 없음
     }
-    setNickname(value);
+
+    // 글자 수가 5자 이하면 상태 업데이트
+    if (value.length <= 5) {
+      setNickname(value);
+    }
   };
 
   // 생년월일 입력값 처리
@@ -24,7 +37,6 @@ const InfoPage = () => {
 
     // 백스페이스 동작 처리
     if (birthDate.length > value.length) {
-      // 기존 값이 더 길면 사용자가 지운 동작
       setBirthDate(value); // 삭제 동작 그대로 반영
       return;
     }
@@ -43,12 +55,39 @@ const InfoPage = () => {
       value = value + "/"; // 자동으로 / 추가
     }
 
+    // 유효성 검사
+    if (value.length === 10) {
+      const [year, month, day] = value.split("/").map((v) => parseInt(v, 10));
+
+      if (year > 2024) {
+        alert("연도는 2024년까지만 입력 가능합니다.");
+        return;
+      }
+
+      if (month < 1 || month > 12) {
+        alert("월은 1월에서 12월까지만 입력 가능합니다.");
+        return;
+      }
+
+      if (day < 1 || day > 31) {
+        alert("일은 1일에서 31일까지만 입력 가능합니다.");
+        return;
+      }
+    }
+
     setBirthDate(value);
   };
 
   // 완료 버튼 활성화 여부 확인
   const isButtonEnabled =
     nickname.length > 0 && birthDate.length === 10 && !nicknameError;
+
+  // 완료 버튼 클릭 처리
+  const handleButtonClick = () => {
+    if (isButtonEnabled) {
+      setIsButtonClicked(true);
+    }
+  };
 
   return (
     <div className="ml-[24px] mr-[24px]">
@@ -88,9 +127,7 @@ const InfoPage = () => {
         </div>
       </div>
       {nicknameError && (
-        <div className="text-rose-500 text-sm mt-[8px]">
-          닉네임은 5글자 이하여야 합니다.
-        </div>
+        <div className="text-rose-500 text-sm mt-[8px]">{nicknameError}</div>
       )}
 
       {/* 설명 */}
@@ -122,10 +159,13 @@ const InfoPage = () => {
 
       {/* 완료 버튼 */}
       <button
+        onClick={handleButtonClick}
         disabled={!isButtonEnabled}
         className={`w-full h-[55px] rounded-xl p-[16px] mt-[210px] ${
-          isButtonEnabled
-            ? "bg-orange-500 text-white hover:bg-orange-600"
+          isButtonClicked
+            ? "bg-main text-white"
+            : isButtonEnabled
+            ? "bg-main text-white"
             : "bg-zinc-300 text-zinc-500"
         }`}
       >

@@ -10,8 +10,9 @@ import InfoPage from "./pages/InfoPage";
 import InterestPage from "./pages/InterestPage";
 import QuestionPage from "./pages/QuestionPage";
 import AllProgramPage from "./pages/AllProgramPage";
-import SelfCheckSurveyPage from '@/pages/SelfCheckSurveyPage.tsx';
-import ChatBotPage from '@/pages/ChatBotPage.tsx';
+import SelfCheckSurveyPage from "@/pages/SelfCheckSurveyPage.tsx";
+import ChatBotPage from "@/pages/ChatBotPage.tsx";
+import LoginLoadingPage from "./pages/LoginLoadingPage";
 
 const Router = () => {
   return (
@@ -20,11 +21,11 @@ const Router = () => {
         {/* Layout을 포함한 공통 구조 */}
         <Route element={<Layout />}>
           {/* HomePage 경로 */}
-          <Route path='/' element={<HomePage />} />
+          <Route path="/" element={<HomePage />} />
           {/* ProgramDetailPage 경로 */}
-          <Route path='/program/:id' element={<ProgramDetailPage />} />
-          <Route path='/self-check' element={<SelfCheckPage />} />
+          <Route path="/self-check" element={<SelfCheckPage />} />
         </Route>
+
         <Route element={<NoneContainerLayout />}>
           <Route path="/self-check" element={<SelfCheckPage />} />
           <Route path="/self-check-result" element={<SelfCheckResultPage />} />
@@ -34,9 +35,10 @@ const Router = () => {
           <Route path="/interest" element={<InterestPage />} />
           <Route path="/question" element={<QuestionPage />} />
           <Route path="/allprogram" element={<AllProgramPage />} />
-          <Route path='/self-check/survey' element={<SelfCheckSurveyPage />} />
-          <Route path='/self-check-result' element={<SelfCheckResultPage />} />
-          <Route path='/chat-bot' element={<ChatBotPage />} />
+          <Route path="/self-check/survey" element={<SelfCheckSurveyPage />} />
+          <Route path="/self-check-result" element={<SelfCheckResultPage />} />
+          <Route path="/chat-bot" element={<ChatBotPage />} />
+          <Route path="/login-loading" element={<LoginLoadingPage />} />
         </Route>
       </Routes>
     </BrowserRouter>

@@ -1,37 +1,81 @@
-import { useNavigate } from 'react-router-dom';
-import ClockIcon from '@/assets/icons/Clock.svg?react';
-import BookmarkIcon from '@/assets/icons/Bookmark.svg?react';
+import { useNavigate } from "react-router-dom";
+import ClockIcon from "@/assets/icons/Clock.svg?react";
+import BookmarkIcon from "@/assets/icons/Bookmark.svg?react";
+import BookmarkIcon2 from "@/assets/icons/Bookmark2.svg?react"; // 대체 아이콘
 
-const ProgramItem = () => {
+interface ProgramItemProps {
+  program: {
+    id: string;
+    category: string;
+    title: string;
+    startDate: string;
+    endDate: string;
+    status: string;
+    isBookmarked: boolean;
+    isSelected: boolean;
+  };
+  onBookmarkToggle: (id: string) => void;
+  onProgramSelect: (id: string) => void;
+}
+
+const ProgramItem: React.FC<ProgramItemProps> = ({
+  program,
+  onBookmarkToggle,
+  onProgramSelect,
+}) => {
   const navigate = useNavigate();
 
-  const handleClick = (id: string) => {
-    navigate(`/program/${id}`);
+  const handleClick = () => {
+    onProgramSelect(program.id); // 클릭 시 상태 토글
+    navigate(`/program/${program.id}`);
   };
+
+  const toggleBookmark = (e: React.MouseEvent) => {
+    e.stopPropagation(); // 부모 클릭 이벤트 전파 방지
+    onBookmarkToggle(program.id); // 북마크 상태 토글
+  };
+
   return (
     <div
-      className='bg-gray1 h-[115px] rounded-xl flex flex-row cursor-pointer items-center justify-between p-[26px]'
-      onClick={() => handleClick('1')} // 예: 프로그램 ID 1
+      className={`h-[115px] rounded-xl flex flex-row cursor-pointer items-center justify-between p-[26px] ${
+        program.isSelected
+          ? "bg-orange-100 border border-orange-400"
+          : "bg-gray1"
+      }`}
+      onClick={handleClick}
     >
-      <div className='flex flex-col'>
-        <div className='flex flex-row'>
-          <div className='text-fontSemiMicro text-orange-400'>건강</div>
-          <div className='text-fontSemiMicro text-rose-400 font-semibold rounded-lg ml-[8px] w-[34px] h-[16px] bg-rose-200 text-center'>
+      <div className="flex flex-col">
+        <div className="flex flex-row">
+          <div className="text-fontSemiMicro text-orange-400">
+            {program.category}
+          </div>
+          <div className="text-fontSemiMicro text-rose-400 font-semibold rounded-lg ml-[8px] w-[34px] h-[16px] bg-rose-200 text-center">
             D-1
           </div>
         </div>
-        <div className='text-md w-[220px]'>
-          보호연장아동 1:1 "기질, 성격검사 및 해석 상담"
-        </div>
-        <div className='text-xs text-zinc-500 mt-[4px] flex flex-row'>
-          <ClockIcon className='mr-[4px]' />
-          2024.10.01-11.17
+        <div className="text-md w-[220px]">{program.title}</div>
+        <div className="text-xs text-zinc-500 mt-[4px] flex flex-row">
+          <ClockIcon className="mr-[4px]" />
+          {program.startDate} - {program.endDate}
         </div>
       </div>
-      <div className='flex flex-col items-end'>
-        <BookmarkIcon className='mb-[36px] cursor-pointer' />
-        <button className='w-[52px] h-[27px] bg-orange-200 text-xs text-zinc-600 font-semibold rounded-2xl border border-orange-500'>
-          모집중
+      <div className="flex flex-col items-end">
+        {/* 북마크 아이콘 (클릭 시 토글) */}
+        <div onClick={toggleBookmark}>
+          {program.isBookmarked ? (
+            <BookmarkIcon2 className="mb-[37px] cursor-pointer" />
+          ) : (
+            <BookmarkIcon className="mb-[36px] cursor-pointer" />
+          )}
+        </div>
+        <button
+          className={`w-[52px] h-[27px] text-xs font-semibold rounded-2xl border ${
+            program.isSelected
+              ? "bg-orange-300 text-black border-orange-500"
+              : "bg-orange-200 text-zinc-600 border-orange-500"
+          }`}
+        >
+          {program.status}
         </button>
       </div>
     </div>
