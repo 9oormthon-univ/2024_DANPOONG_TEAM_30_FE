@@ -12,7 +12,7 @@ const Footer = () => {
         <NavItem path={'/'} contentName={'홈'}>
           <HomeIcon />
         </NavItem>
-        <NavItem path={'/program'} contentName={'프로그램'}>
+        <NavItem path={'/allprogram'} contentName={'프로그램'}>
           <ProgramIcon />
         </NavItem>
         <NavItem path={'/self-check'} contentName={'자가진단'}>
