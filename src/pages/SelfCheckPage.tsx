@@ -29,7 +29,7 @@ const SelfCheckPage = () => {
       </div>
       <div className={'my-[30px] p-[22px] bg-[#FFF6EF] rounded-[15px]'}>
         <Theme title={'쿨쿨이'} explain={'아직 자립 준비가 부족해'} />
-        <img src={'/one.jpg'} alt={'ch'} className='w-[190px] mx-auto' />
+        <img src={'/one.svg'} alt={'ch'} className='w-[190px] mx-auto' />
         {showBadge ? (
           <div className='flex flex-col gap-[15px] h-[200px]'>
             <div className='grid grid-cols-3 gap-[15px] justify-items-center	'>

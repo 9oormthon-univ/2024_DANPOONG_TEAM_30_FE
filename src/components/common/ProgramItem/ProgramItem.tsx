@@ -2,7 +2,15 @@ import { useNavigate } from 'react-router-dom';
 import ClockIcon from '@/assets/icons/Clock.svg?react';
 import BookmarkIcon from '@/assets/icons/Bookmark.svg?react';
 
-const ProgramItem = () => {
+const ProgramItem = ({
+  categoryTitle,
+  endDate,
+  title,
+}: {
+  categoryTitle: string;
+  endDate: string;
+  title: string;
+}) => {
   const navigate = useNavigate();
 
   const handleClick = (id: string) => {
@@ -15,17 +23,17 @@ const ProgramItem = () => {
     >
       <div className='flex flex-col'>
         <div className='flex flex-row'>
-          <div className='text-fontSemiMicro text-orange-400'>건강</div>
+          <div className='text-fontSemiMicro text-orange-400'>
+            {categoryTitle}
+          </div>
           <div className='text-fontSemiMicro text-rose-400 font-semibold rounded-lg ml-[8px] w-[34px] h-[16px] bg-rose-200 text-center'>
             D-1
           </div>
         </div>
-        <div className='text-md w-[220px]'>
-          보호연장아동 1:1 "기질, 성격검사 및 해석 상담"
-        </div>
+        <div className='text-md w-[220px]'>{title}</div>
         <div className='text-xs text-zinc-500 mt-[4px] flex flex-row'>
           <ClockIcon className='mr-[4px]' />
-          2024.10.01-11.17
+          {endDate}
         </div>
       </div>
       <div className='flex flex-col items-end'>

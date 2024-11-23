@@ -2,33 +2,76 @@ import Theme from '@/components/SelfCheckSurvey/Theme.tsx';
 import Gauge from '@/components/SelfCheckResult/Gauge.tsx';
 import Container from '@/components/common/Layout/Container.tsx';
 import ProgramItem from '@/components/common/ProgramItem/ProgramItem.tsx';
+import { useEffect, useState } from 'react';
+import { selfCheckResultApi } from '@/api/selfCheckApi.ts';
+import { SelfCheckResult } from '@/types/selfCheck.ts';
+
+const character = {
+  one: '쿨쿨이',
+  two: '뚝딱뚝딱',
+  three: '두근두근',
+  four: '척척박사',
+  five: '으쓱으쓱',
+};
+
+const explain = {
+  one: '아직 자립 준비가 부족해',
+  two: '조금씩 움직이며 자립을 준비하는 중',
+  three: '자립에 대한 기대감과 긴장감이 공존하는 상태',
+  four: '결심이 굳고 자립이 능력이 생겼다',
+  five: '이젠 혼자서도 잘하는 위풍당당',
+};
 
 const SelfCheckResultPage = () => {
+  const [responseData, setResponseData] = useState<SelfCheckResult | null>(
+    null
+  );
+
+  useEffect(() => {
+    (async () => {
+      const response = await selfCheckResultApi();
+      setResponseData(response);
+    })();
+  }, []);
+
+  if (!responseData) return null;
+
   return (
     <Container>
       <div className={'mt-[20px]'}>
-        <Theme title={'쿨쿨이'} explain={'아직 자립 준비가 부족해'} />
+        <Theme
+          title={character[responseData.characterType]}
+          explain={explain[responseData.characterType]}
+        />
       </div>
-      <img src={'/one.jpg'} alt={'ch'} className='w-[190px] mx-auto' />
+      <img
+        src={`/${responseData.characterType}.svg`}
+        alt={'ch'}
+        className='w-[190px] mx-auto'
+      />
       <div className='mx-auto w-[80%] flex flex-col gap-[15px]'>
-        <Gauge title={'주거'} count={1} />
-        <Gauge title={'주거'} count={2} />
-        <Gauge title={'주거'} count={3} />
-        <Gauge title={'주거'} count={4} />
-        <Gauge title={'주거'} count={5} />
+        {responseData.results.length > 0 &&
+          responseData.results.map((item) => (
+            <Gauge
+              key={item.categoryTitle}
+              title={item.categoryTitle}
+              count={item.score}
+            />
+          ))}
       </div>
       <div>
         <p className={'font-weightSemiBold'}>쿨쿨낙엽님을 위한 추천 프로그램</p>
         <div className={'flex gap-[8px] overflow-x-auto mt-[16px]'}>
-          <div className={'border-2 border-main rounded-xl'}>
-            <ProgramItem />
-          </div>
-          <div className={'border-2 border-main rounded-xl'}>
-            <ProgramItem />
-          </div>
-          <div className={'border-2 border-main rounded-xl'}>
-            <ProgramItem />
-          </div>
+          {responseData.programs.map((item) => (
+            <div className={'border-2 border-main rounded-xl'}>
+              <ProgramItem
+                key={item.id}
+                categoryTitle={item.categoryTitle}
+                endDate={item.endDate}
+                title={item.title}
+              />
+            </div>
+          ))}
         </div>
       </div>
       <button
