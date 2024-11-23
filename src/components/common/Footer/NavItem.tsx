@@ -8,11 +8,9 @@ const NavItem = ({ children, contentName, path }: NavItemProps) => {
   return (
     <Link
       to={path}
-      className={
-        'w-[50px] flex flex-col items-center text-center font-light text-[12px] text-gray50'
-      }
+      className={`w-[50px] h-[40px] flex flex-col items-center text-center font-light text-[12px] text-gray50 ${isActive ? '[&_path]:fill-main' : '[&_path]:fill-gray50'}`}
     >
-      <div style={{ fill: isActive ? '#97DF47' : '#BBBEC2' }}>{children}</div>
+      {children}
       {contentName && <span>{contentName}</span>}
     </Link>
   );
