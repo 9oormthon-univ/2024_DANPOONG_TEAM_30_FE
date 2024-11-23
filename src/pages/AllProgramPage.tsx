@@ -93,6 +93,7 @@ const AllProgramPage: React.FC = () => {
             categoryTitle={program.status}
             title={program.title}
             endDate={program.endDate}
+            scraped={false}
           />
         ))}
       </div>

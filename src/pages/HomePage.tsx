@@ -40,6 +40,10 @@ const HomePage: React.FC = () => {
     try {
       const response = await fetch("/api/v1/main", {
         method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxNDgiLCJBdXRob3JpemF0aW9uIjoiUk9MRV9NRU1CRVIiLCJleHAiOjE3MzIzOTY5MDYsImlhdCI6MTczMjM3ODkwNn0.i4QgorB7dg__ZZDabtsoY01T_ObpSdGk1hT0fOflRf-oqBKO5xPSO001Vb0Piwizn9Z354XZReMKa4UROnfMmw`,
+        },
       });
 
       if (!response.ok) {
@@ -103,6 +107,7 @@ const HomePage: React.FC = () => {
                   title={program.title}
                   endDate={program.endDate}
                   scraped={program.scraped}
+                  categoryTitle={""}
                 />
               ))
             ) : (
