@@ -18,7 +18,7 @@ const Footer = () => {
         <NavItem path={'/self-check'} contentName={'자가진단'}>
           <SelfCheckIcon />
         </NavItem>
-        <NavItem path={'/map'} contentName={'지도'}>
+        <NavItem path={'/mapmain'} contentName={'지도'}>
           <MapIcon />
         </NavItem>
       </nav>
