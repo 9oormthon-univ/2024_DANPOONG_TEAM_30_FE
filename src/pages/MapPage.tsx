@@ -14,10 +14,10 @@ const MapPage = () => {
 
   return (
     <>
-      <header className='px-[24px] py-[8px] bg-[#F6F6F6] font-weightMedium'>
+      <header className='px-[24px] py-[8px] font-weightMedium'>
         <SearchBar />
         <div className={'mt-[20px] flex gap-[10px]'}>
-          <FilterItem isCategory={true} content={'전월세'} isActive={false} />
+          <FilterItem isCategory={true} content={'금액'} isActive={false} />
           <FilterItem isCategory={true} content={'구조 면적'} isActive={true} />
         </div>
         <div className={'flex flex-col'}>
