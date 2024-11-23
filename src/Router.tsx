@@ -17,6 +17,7 @@ import SearchPage from '@/pages/SearchPage.tsx';
 import MapResultListPage from '@/pages/MapResultListPage.tsx';
 import MapMain from "./pages/MapMain";
 import KnowPage from "@/pages/KnowPage.tsx";
+import Reselector from "./pages/Reselector";
 
 const Router = () => {
   return (
@@ -30,6 +31,8 @@ const Router = () => {
           <Route path="/self-check" element={<SelfCheckPage />} />
           <Route path="/allprogram" element={<AllProgramPage />} />
           <Route path="/know" element={<KnowPage />} />
+          <Route path='/mapmain' element={<MapMain />} />
+
         </Route>
         <Route element={<NoneContainerLayout />}>
           <Route path="/self-check" element={<SelfCheckPage />} />
@@ -44,7 +47,7 @@ const Router = () => {
           <Route path='/self-check-result' element={<SelfCheckResultPage />} />
           <Route path='/chat-bot' element={<ChatBotPage />} />
           <Route path='/map' element={<MapPage />} />
-          <Route path='/mapmain' element={<MapMain />} />
+          <Route path='/map/reselect' element={<Reselector />} />
           <Route path='/search' element={<SearchPage />} />
           <Route path='/map-result-list' element={<MapResultListPage />} />
         </Route>
