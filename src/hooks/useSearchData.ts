@@ -4,13 +4,15 @@ import { getSearchList } from '@/api/kakaoApi.ts';
 
 const useSearchData = () => {
   const [searchListsData, setSearchListsData] = useState<SearchPlace[]>([]);
-  const centerLocation = JSON.parse(localStorage.getItem('Location') || '');
+//  const centerLocation = localStorage.getItem('Location') ;
+
+
 
   const searchFunc = async (query: string) => {
     const result = await getSearchList(
       query,
-      centerLocation.lng,
-      centerLocation.lat
+      '',
+      ''
     );
 
     setSearchListsData([...result.documents]);

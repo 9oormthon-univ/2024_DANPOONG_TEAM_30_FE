@@ -1,12 +1,77 @@
 import { API_PATH } from '@/constants/path.ts';
+import { accessToken } from '@/api/chatbotApi.ts';
 
 export const selfCheckResultApi = async () => {
   try {
-    const response = await fetch(`${API_PATH.CHAT_BOT.GET}`, {
+    const response = await fetch(`${API_PATH.SELF_CHECK.RESULT.GET}`, {
       method: 'GET',
       headers: {
         'Content-type': 'application/json',
-        Authorization: `Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxNDgiLCJBdXRob3JpemF0aW9uIjoiUk9MRV9NRU1CRVIiLCJleHAiOjE3MzIzNzMzNjQsImlhdCI6MTczMjM3MTU2NH0.e4wSDME_Xcoyz_6q_GRc-9xAhYZfVs3Hu9x1SZ5qFaMAD7DFDLCejuzMtdPauzSGGHrffcHlih6CwpNsJ1pfwA`,
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+
+    const result = await response.json();
+
+    if (!response.ok) {
+      throw new Error(result.error);
+    }
+    return result;
+  } catch (err) {
+    alert(err);
+  }
+};
+
+export const GetSelfCheckQuestionsApi = async (page: string) => {
+  const queryString = new URLSearchParams({ page });
+
+  try {
+    const response = await fetch(
+      `${API_PATH.SELF_CHECK.QUESTION.GET}?${queryString}`,
+      {
+        method: 'GET',
+        headers: {
+          'Content-type': 'application/json',
+          Authorization: `Bearer ${accessToken}`,
+        },
+      }
+    );
+
+    const result = await response.json();
+
+    if (!response.ok) {
+      throw new Error(result.error);
+    }
+    return result;
+  } catch (err) {
+    alert(err);
+  }
+};
+
+export const PostSelfCheckQuestionsApi = async (data: string) => {
+  try {
+    const response = await fetch(`${API_PATH.SELF_CHECK.SURVEY.POST}`, {
+      method: 'POST',
+      headers: {
+        'Content-type': 'application/json',
+        Authorization: `Bearer ${accessToken}`,
+      },
+      body: data,
+    });
+
+    return response.ok;
+  } catch (err) {
+    alert(err);
+  }
+};
+
+export const getSelfCheckMain = async () => {
+  try {
+    const response = await fetch(`${API_PATH.SELF_CHECK.MAIN.GET}`, {
+      method: 'GET',
+      headers: {
+        'Content-type': 'application/json',
+        Authorization: `Bearer ${accessToken}`,
       },
     });
 
