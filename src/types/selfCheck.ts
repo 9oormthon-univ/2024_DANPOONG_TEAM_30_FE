@@ -1,7 +1,7 @@
 import { Program } from '@/types/program.ts';
 
 export interface SelfCheckResult {
-  characterType: 'one' | 'two' | 'three' | 'four' | 'five';
+  characterType: 'ONE' | 'TWO' | 'THREE' | 'FOUR' | 'FIVE';
   programs: Program[];
   results: { categoryTitle: string; score: number }[];
 }
